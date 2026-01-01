@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Azul | Portfólio</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        techgreen: '#2563eb', // Mantido o teu azul de acento
+                    }
+                },
+                fontFamily: {
+                    sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                }
+            }
+        }
+    </script>
+    <style>
+        body, html { height: 100%; background-color: #0a0a0a; scroll-behavior: smooth; }
+        .hero-img { object-fit: cover; aspect-ratio: 4/5; }
+    </style>
+</head>
+<body class="bg-dark text-white font-sans antialiased overflow-x-hidden">
+
+<div class="min-h-screen flex flex-col max-w-7xl mx-auto px-6 md:px-12 py-8">
+
+    <header class="flex flex-col md:flex-row justify-between items-center gap-6 mb-16">
+        <div class="text-2xl font-black tracking-tighter uppercase group cursor-default">
+            João Azul<span class="text-techgreen group-hover:animate-pulse">.</span>
+        </div>
+
+        <nav class="flex items-center gap-8 text-sm font-medium text-zinc-400">
+            <a href="#projetos" class="hover:text-white transition-colors">Projetos</a>
+            <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
+            <a href="{{ url_for('static', filename='assets/cv/joaoazulcv.pdf') }}" class="hover:text-white transition-colors border-b border-transparent hover:border-techgreen">CV</a>
+        </nav>
+    </header>
+
+    <main class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+
+        <div class="md:col-span-5 relative group"
+             hx-get="/get-video"
+             hx-trigger="mouseenter once"
+             hx-target="#video-slot">
+
+            <div class="absolute -inset-2 bg-techgreen/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+
+            <div class="relative rounded-[2rem] overflow-hidden border border-zinc-800 shadow-2xl bg-zinc-900 aspect-[4/5]">
+                <img src="{{ url_for('static', filename='assets/joaolanding.JPG') }}" alt="Foto do João Azul"
+                     class="hero-img w-full h-auto grayscale group-hover:opacity-0 transition-opacity duration-500 z-10 relative">
+
+                <div id="video-slot"></div>
+            </div>
+        </div>
+
+        <div class="md:col-span-7 flex flex-col text-left">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-10">
+                Estudante e<br>Futuro
+                <span class="relative inline-block text-techgreen/10 text-stroke">
+                        <span class="relative z-10 text-white">Engenheiro</span>
+                        <div class="absolute -bottom-2 left-0 w-full h-3 bg-techgreen/80 rounded-full"></div>
+                    </span>
+                <br>de Software.
+            </h1>
+
+            <p class="text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed mb-12">
+                Focado em <span class="text-zinc-200">Python</span>, <span class="text-zinc-200">Back-end development</span> e infraestrutura. Aluno do 1º ano do CTeSP de TI na UAlg, a explorar o mundo de <span class="text-zinc-200">DevOps</span> e CyberSec.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-8 items-center mt-12">
+                <a href="#projetos" class="group relative px-8 py-4 border-2 border-white text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:text-black hover:bg-white active:scale-95">
+                        <span class="relative z-10 flex items-center gap-2">
+                            Explorar Projetos
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </span>
+                </a>
+
+                <a href="{{ url_for('static', filename='assets/cv/joaoazulcv.pdf') }}" target="_blank" class="group relative py-2 text-zinc-400 font-medium hover:text-white transition-colors duration-300">
+                        <span class="flex items-center gap-2">
+                            Download Curriculum
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-y-1 transition-transform duration-300"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        </span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-techgreen transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div class="py-32 md:py-48">
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
+    </div>
+
+    <section id="tecnologias" class="mb-40">
+    <p class="text-zinc-500 font-mono text-[30px] uppercase tracking-[0.5em] mb-16 text-center">Tecnologias</p>
+
+    <div class="flex flex-wrap justify-center items-center gap-12 opacity-40 hover:opacity-100 transition-opacity duration-700">
+
+        <div class="flex flex-col items-center gap-4 group">
+            <div class="w-10 h-10 text-zinc-400 group-hover:text-[#3776AB] transition-colors duration-500">
+                {% include 'icons/python.html' %}
+            </div>
+            <span class="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-300 uppercase tracking-widest">Python</span>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 group">
+            <div class="w-10 h-10 text-zinc-400 group-hover:text-[#2496ED] transition-colors duration-500">
+                {% include 'icons/docker.html' %}
+            </div>
+            <span class="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-300 uppercase tracking-widest">Docker</span>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 group">
+            <div class="w-10 h-10 text-zinc-400 group-hover:text-[#F7DF1E] transition-colors duration-500">
+                {% include 'icons/js.html' %}
+            </div>
+            <span class="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-300 uppercase tracking-widest">JavaScript</span>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 group">
+            <div class="w-10 h-10 text-zinc-400 group-hover:text-[#E34F26] transition-colors duration-500">
+                {% include 'icons/html.html' %}
+            </div>
+            <span class="text-[10px] font-mono text-zinc-600 group-hover:text-zinc-300 uppercase tracking-widest">Html</span>
+        </div>
+
+    </div>
+</section>
+
+    <section id="contacto" class="py-24 border-t border-zinc-900 flex flex-col items-center text-center">
+        <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-8">
+            Vamos construir <br>algo <span class="text-techgreen">juntos?</span>
+        </h2>
+        <a href="mailto:cybersec.joao@proton.me" class="flex items-center gap-4 text-white transition-all duration-300 group border border-zinc-800 rounded-full px-10 py-5 text-xl bg-zinc-900/50 hover:bg-techgreen hover:border-techgreen shadow-2xl hover:scale-105 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:stroke-white transition-colors"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span class="font-bold">Entrar em contacto!</span>
+        </a>
+    </section>
+
+    <footer class="mt-20 py-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-600 text-[10px] tracking-[0.2em] uppercase">
+
+        <div class="flex items-center gap-6">
+            <p class="whitespace-nowrap">2025, João Azul</p>
+
+            <div class="flex items-center gap-4 border-l border-zinc-800 pl-6">
+                <a href="https://github.com/joaaoazul" target="_blank" class="block w-6 h-6 hover:text-white transition-colors">
+                    {% include 'icons/github.html' %}
+                </a>
+                <a href="https://www.instagram.com/joaaoazul/" target="_blank" class="block w-6 h-6 hover:text-white transition-colors">
+                    {% include 'icons/instagram.html' %}
+                </a>
+                <a href="https://www.linkedin.com/in/joão-azul-4824022a3/" target="_blank" class="block w-6 h-6 hover:text-white transition-colors">
+                    {% include 'icons/linkedin.html' %}
+                </a>
+            </div>
+        </div>
+
+        <div class="flex gap-8">
+            <span>Orgulhosamente feito em Faro, Portugal 🇵🇹</span>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
