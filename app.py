@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/home-content")
+def home_content():
+    return render_template("home_fragment.html")
+
 @app.route("/get-video")
 def get_video():
     return '''
@@ -13,6 +17,22 @@ def get_video():
                 <source src="/static/assets/joaolive.MOV" type="video/mp4">
             </video>
         '''
+
+
+projects_list = [
+
+    {
+        "title": "Portefólio Flask + HTMX",
+        "desc": "Desenvolvimento de uma SPA (Single Page Application) focada em performance.",
+        "tech": ["Python", "Flask", "HTMX", "Tailwind"],
+        "link": "https://github.com/joaaoazul/portfoliojo"
+    },
+
+]
+
+@app.route("/projects-content")
+def projects_content():
+    return render_template("projects_fragment.html", projects=projects_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
